@@ -4,6 +4,10 @@ export class CreateTtsmp3Dto {
   msgs: string[];
   lang?: string;
 }
+export class CreateBySplitTtsmp3Dto {
+  msgs: string;
+  lang?: string;
+}
 
 export class ResCreateMp3 {
   Error: number;

@@ -8,7 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { Ttsmp3Service } from './ttsmp3.service';
-import { CreateTtsmp3Dto } from './dto/create-ttsmp3.dto';
+import {
+  CreateBySplitTtsmp3Dto,
+  CreateTtsmp3Dto,
+} from './dto/create-ttsmp3.dto';
 import { UpdateTtsmp3Dto } from './dto/update-ttsmp3.dto';
 
 @Controller('ttsmp3')
@@ -18,6 +21,11 @@ export class Ttsmp3Controller {
   @Post()
   create(@Body() createTtsmp3Dto: CreateTtsmp3Dto) {
     return this.ttsmp3Service.create(createTtsmp3Dto);
+  }
+
+  @Post('/create-by-split')
+  createBySplit(@Body() createTtsmp3Dto: CreateBySplitTtsmp3Dto) {
+    return this.ttsmp3Service.createBySplit(createTtsmp3Dto);
   }
 
   @Get()
