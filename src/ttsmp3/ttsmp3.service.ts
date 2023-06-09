@@ -16,17 +16,21 @@ export class Ttsmp3Service {
 
     const res = await Promise.all(
       msgs.map(async (msg: string) => {
+        const msgTrimmed = msg.trim();
         const data = new FormData();
         const randomLang =
           lang || randomElement([LangType.Ivy, LangType.Justin]);
-        data.append('msg', msg);
+        data.append('msg', msgTrimmed);
         data.append('lang', randomLang);
         data.append('source', 'ttsmp3');
 
         const resCreateMp3: {
           data: ResCreateMp3;
         } = await axios.post('https://ttsmp3.com/makemp3_new.php', data);
-        await downloadFile(resCreateMp3.data.URL, `output_tts/${msg}.mp3`);
+        await downloadFile(
+          resCreateMp3.data.URL,
+          `output_tts/${msgTrimmed}.mp3`,
+        );
 
         return 'success';
       }),
